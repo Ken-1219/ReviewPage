@@ -50,20 +50,20 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen  sm:items-center flex-col  justify-start p-5 bg-white sm:bg-green-50 md:px-56">
-      <div className="flex flex-col sm:items-center sm:justify-center flex-1 text-center">
+    <main className="flex min-h-screen  sm:items-center flex-col  justify-start p-5 bg-green-50 md:px-56">
+      <div className="flex flex-col sm:items-center sm:justify-center justify-start flex-1">
 
         <div className="mb-9">
           <h1 className="text-3xl font-bold text-black">Leave a review</h1>
         </div>
 
-        <div className="md:flex md:flex-col">
+        <div className="sm:flex sm:flex-col">
           <div className="w-full">
             <div className="mb-12">
 
               <h3 className="text-xl font-semibold text-black my-2">Safety</h3>
               <p className="text-xs text-slate-400">How safe did you feel with Ayurveda?</p>
-              <div className="flex flex-col flex-wrap items-center justify-center">
+              <div className="flex flex-col flex-wrap justify-center">
                 <Rating
                   ratingInPercent={100}
                   onClick={handleSafetyClick}
@@ -78,7 +78,7 @@ export default function Home() {
 
                 <h3 className="text-xl font-semibold text-black my-2">Communication</h3>
                 <p className="text-xs text-slate-400">How easy was to communicate with Ayurveda?</p>
-                <div className="flex flex-col flex-wrap items-center justify-center">
+                <div className="flex flex-col flex-wrap  justify-center">
                   <Rating
                     ratingInPercent={100}
                     onClick={handleCommunicationClick}

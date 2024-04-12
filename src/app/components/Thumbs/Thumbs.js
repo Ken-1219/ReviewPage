@@ -47,12 +47,12 @@ const Thumbs = ({ onSelectionChange }) => {
     };
 
     return (
-        <div className="flex w-full flex-col justify-start sm:justify-center sm:items-center p-4 flex-wrap">
+        <div className="flex w-full flex-col justify-start sm:justify-center sm:p-0 flex-wrap">
 
             <h3 className="text-xl font-semibold text-black my-2">Would you reccomend Ayurveda?</h3>
             <p className="text-xs text-slate-400">Your opinion wouldn&apos;t be posted publicly</p>
 
-            <div className="flex items-center justify-center p-4">
+            <div className="flex py-4">
 
                 <div
                     className="flex items-end font-semibold text-md mx-2 sm:mx-1 cursor-pointer"
