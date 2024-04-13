@@ -13,7 +13,6 @@
 /.next/
 /out/
 
-/src/app/api/abc
 
 # production
 /build
