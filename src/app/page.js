@@ -15,10 +15,12 @@ export default function Home() {
   const [thumbsSelection, setThumbsSelection] = useState(null);
   const [selectedTraits, setSelectedTraits] = useState([]);
   const [feedback, setFeedback] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDataSent, setIsDataSent] = useState(null);
 
 
   const handleSafetyClick = (value) => {
-+    setSafetyValue(value);
+    +    setSafetyValue(value);
   };
 
 
@@ -41,13 +43,53 @@ export default function Home() {
     setFeedback(e.target.value);
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     if (!safetyValue || !communicationValue || !thumbsSelection || !selectedTraits) {
       return;
     }
-    router.push("/thank-you", { state: { safetyValue, communicationValue, thumbsSelection, selectedTraits } });
+
+    setIsSubmitted(true);
+
+    try {
+      const response = await fetch("/api/Feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          safetyRating: safetyValue,
+          commRating: communicationValue,
+          thumbs: thumbsSelection,
+          traits: selectedTraits,
+          feedback: feedback
+        }),
+      });
+
+      if (response.status === 200) {
+        setSafetyValue(0);
+        setCommunicationValue(0);
+        setThumbsSelection(null);
+        setSelectedTraits([]);
+        setFeedback("");
+        setIsDataSent(true);
+
+        router.push("/thank-you");
+      }
+      else {
+        setIsDataSent(false);
+      }
+    }
+    catch (error) {
+      console.log(error.message);
+      setIsDataSent(false);
+    }
+
+    if (!isDataSent) {
+      setIsSubmitted(false);
+    }
   }
+
 
   return (
     <main className="flex min-h-screen  sm:items-center flex-col  justify-start p-5 bg-green-50 md:px-56">
@@ -137,6 +179,12 @@ export default function Home() {
             onClick={handleClick}>
             Submit Review
           </button>
+
+          {isSubmitted && !isDataSent && (
+            <div className="flex justify-center items-center my-4">
+              <p className="text-red-500 text-center">Something went wrong. Please try again.</p>
+            </div>
+          )}
         </div>
 
       </div>
