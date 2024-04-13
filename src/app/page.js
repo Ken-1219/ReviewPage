@@ -50,6 +50,7 @@ export default function Home() {
     }
 
     setIsSubmitted(true);
+    setIsDataSent(null);
 
     try {
       const response = await fetch("/api/Feedback", {
@@ -85,9 +86,7 @@ export default function Home() {
       setIsDataSent(false);
     }
 
-    if (!isDataSent) {
-      setIsSubmitted(false);
-    }
+    setIsSubmitted(false);
   }
 
 
@@ -180,7 +179,7 @@ export default function Home() {
             Submit Review
           </button>
 
-          {isSubmitted && !isDataSent && (
+          {isSubmitted && isDataSent===false && (
             <div className="flex justify-center items-center my-4">
               <p className="text-red-500 text-center">Something went wrong. Please try again.</p>
             </div>
